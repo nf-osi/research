@@ -144,11 +144,11 @@ iii. Process: LLMs generate draft NF Dataset metadata, automated validation agai
 
 iv. Human Evaluation Design:
 
-Purpose: Assess draft metadata quality, judge relative LLM performance, measure correction effort within the NF context, and facilitate curator alignment/feedback for the workflow.
-Participants: 5-6 human evaluators (NF staff who wear data manager/curator hats).
-Evaluation Tool: Custom research app presenting source document snippets and <REDACTED> provider outputs side-by-side. Includes integrated JSON editor for correcting draft NF Dataset metadata and logging changes.
-Data & Batching: 222 backlog items in batches of 10 items (Rationale: Manageable sessions).
-Assignment: Unique batch assignment, full coverage. Variable workload (3 eval x 3 batches; 2 eval x 8 batches).
+- Purpose: Assess draft metadata quality, judge relative LLM performance, measure correction effort within the NF context, and facilitate curator alignment/feedback for the workflow, with an adaptive mechanism to potentially focus efforts based on early consensus. A pragmatic goal is to reach sufficient consensus on the best provider for practical deployment, which may be achieved before going through all comparisons.
+- Participants: 5-6 human evaluators (NF staff who wear data manager/curator hats).
+- Evaluation Tool: Custom research app presenting source document snippets and <REDACTED> provider outputs side-by-side. Includes integrated JSON editor for correcting draft NF Dataset metadata and logging changes.
+- Data & Batching: 222 backlog items in batches of 10 items (Rationale: Manageable sessions).
+- Assignment: Unique batch assignment, full coverage.
 
 Task per Comparison (within the evaluation app):
 1. Review Side-by-Side draft NF Dataset Outputs (A, B, C).
@@ -156,6 +156,15 @@ Task per Comparison (within the evaluation app):
 3. Identify highest-scoring draft.
 4. (Optional) Using the integrated editor, correct the highest-scoring draft to meet quality standards. (Edits logged.)
 6. (Optional) Add comments on rationale, schema issues, or workflow improvement ideas.
+- Adaptive Checkpoint and Decision Rule:
+  - An interim analysis checkpoint is scheduled after approximately 110 items (about half of the backlog) have been evaluated across all evaluators.
+  - The primary purpose of this analysis is to determine if sufficient consensus has emerged to identify a single best-performing provider for practical deployment in our AI-assisted workflow, potentially allowing for a focused evaluation effort in subsequent batches.
+  - This decision will be based on pre-specified criteria applied to the data from the initial ~99 items. To designate a single "winning" provider and adapt the evaluation task for remaining batches, all of the following conditions must be met at the checkpoint:
+1. Score Magnitude: The leading provider's average overall quality score must exceed the average scores of both other providers by at least 1.0 point.
+2. Frequency Dominance: The leading provider must be identified as the highest-scoring output on at least 70% of the items evaluated up to the checkpoint.
+3. Evaluator Agreement: An analysis of the data submitted by each evaluator individually must show that the same leading provider is demonstrably the top performer (based on criteria like average score or frequency of being highest-scoring within their individually assigned batches) for at least 3 out of the 5 evaluators.
+- Adaptation Triggered: If all three criteria are met, the evaluation task for the remaining batches will adapt. Evaluators will only be presented with, score, and correct the output from the designated "winning" provider. This will streamline and reduce human effort needed for evaluation overall. 
+- Continuation: If the criteria are not met at the checkpoint, the full comparative evaluation of all three providers (scoring A, B, C; correcting the best) will continue for all remaining batches.
 
 ### Section 4 - Analysis Plan
 * Analysis aims to determine comparative efficiency of LLMs for NF Dataset generation.
